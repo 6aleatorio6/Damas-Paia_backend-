@@ -3,17 +3,17 @@
 </p>
 
 <p>
-    <p align="center">Jogo de Damas online multiplataforma</p>
+    <p align="center">Jogo de Damas Online multiplataforma</p>
 </p>
 
 ## Descrição
 
-Este é o repositório do backend do projeto **DamasPaia**, um jogo de damas online desenvolvido com **NestJS**, **TypeORM**, **Socket.io** e **PostgreSQL**. O projeto possui uma cobertura robusta de testes, tanto unitários quanto end-to-end.
+Este é o repositório do backend desenvolvido com **NestJS**, **TypeORM**, **Socket.io** e **PostgreSQL** de um jogo de Damas Online. O projeto possui uma cobertura robusta de testes, tanto unitários quanto end-to-end.
 
 | Plataforma                                                   | Tecnologia   | Status       |
 | ------------------------------------------------------------ | ------------ | ------------ |
-| [Backend](https://github.com/6aleatorio6/Damas-Paia_backend) | NestJS       | Em andamento |
-| [Mobile](https://github.com/6aleatorio6/Damas-Paia_mobile)   | React Native | Em andamento |
+| [Backend](https://github.com/6aleatorio6/damas-online_backend) | NestJS       | Finalizado   |
+| [Mobile](https://github.com/6aleatorio6/damas-online_app)   | React Native | Finalizado   |
 | Web                                                          | React        | Não iniciado |
 
 
@@ -156,9 +156,3 @@ O backend deve estar em execução em `localhost:3000`.
 
 3. **Inicie a Partida**:
    A partida começará automaticamente após ambos os jogadores se conectarem.
-
-## Criador
-
-- **Autor:** Leonardo L. Felix
-  - **Email:** [leonardolfelix12@gmail.com](mailto:leonardolfelix12@gmail.com)
-  - **GitHub:** [6aleatorio6](https://www.github.com/6aleatorio6)
