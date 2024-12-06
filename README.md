@@ -3,7 +3,7 @@
 </p>
 
 <p>
-    <p align="center">Jogo de Damas Online multiplataforma</p>
+    <p align="center">Jogo de Damas Online</p>
 </p>
 
 ## Descrição
