@@ -8,72 +8,70 @@
 
 ## Descrição
 
-Este é o repositório do backend desenvolvido com **NestJS**, **TypeORM**, **Socket.io** e **PostgreSQL** de um jogo de Damas Online. O projeto possui uma cobertura robusta de testes, tanto unitários quanto end-to-end.
+Este repositório contém o backend de um jogo de Damas Online, desenvolvido com **NestJS**, **TypeORM**, **Socket.io** e **PostgreSQL**. O projeto oferece uma arquitetura sólida, integrações modernas e funcionalidades em tempo real.  
+
+Conta com uma cobertura abrangente de testes, incluindo testes **unitários** e **end-to-end**, garantindo alta confiabilidade e desempenho.  
 
 | Plataforma                                                   | Tecnologia   | Status       |
 | ------------------------------------------------------------ | ------------ | ------------ |
 | [Backend](https://github.com/6aleatorio6/damas-online_backend) | NestJS       | Finalizado   |
 | [Mobile](https://github.com/6aleatorio6/damas-online_app)   | React Native | Finalizado   |
-| Web                                                          | React        | Não iniciado |
 
 
-## Funcionalidades
+### **Segurança**
 
-### Segurança
+- **Autenticação Segura:** Autenticação via nome e senha com geração de tokens JWT e revalidação de tokens expirados.  
+- **Login com OAuth2:** Integração com Google, Discord e GitHub para login rápido e seguro.  
+- **WebSocket Protegido:** A conexão WebSocket é aberta apenas após validação do token JWT, garantindo segurança e identificação do usuário com UUID.  
 
-- **Autenticação de Usuário:** Realiza autenticação via nome e senha, fornecendo um token JWT.
-- **Revalidação de Token:** Garante a revalidação de tokens expirados.
-- **Autenticação OAuth2:** Integração com provedores OAuth2 como Google, Discord e GitHub, permitindo que os usuários criem contas diretamente por esses provedores.
-- **Conexões WebSocket Protegidas:** Implementa conexões WebSocket seguras utilizando tokens.
-- **Desconfiança com o Frontend:** O backend utiliza o UUID do token para identificar o usuário, inclusive nas conexões WebSocket.
-- 
-### Usuário
+### **Usuário**
 
-- **Cadastro de Usuário:** Permite criar um novo usuário no sistema.
-- **Verificação de Usuário:** Verifica se o nome de usuário ou email já existe.
-- **Manipulação de Usuário:** Rotas protegidas por token para obter, editar e excluir usuários.
+- **Cadastro e Gerenciamento:** Permite criar, editar e excluir usuários com rotas protegidas por token.  
+- **Validação de Dados:** Verifica disponibilidade de nome de usuário e e-mail antes do cadastro.  
 
-### Jogo
+### **Jogo**
 
-- **Fila de Pareamento**: Gerencia a fila de jogadores que desejam criar uma partida, organizando os pareamentos de forma automática.
+- **Pareamento Automático:** Sistema de fila que organiza jogadores para início rápido de partidas.  
+- **Movimentação de Peças:** Backend valida movimentos das peças, aplicando regras como capturas e promoções automáticas.  
+- **Consulta de Jogadas Permitidas:** O backend informa, sob demanda, os movimentos válidos de uma peça com base na posição atual e no estado do tabuleiro.  
+- **Controle de Turnos:** Alternância precisa entre jogadores, garantindo a integridade do fluxo de jogo.  
+- **Ranking por Vitórias:** Classificação dos jogadores com base no número de vitórias acumuladas em partidas.  
+- **Histórico de Partidas:** Registro detalhado de partidas com resultados, datas e adversários.  
+- **Finalização Inteligente:** Partidas encerram automaticamente por desistência, desconexão ou ausência de peças, com controle de tempo de reconexão (`TIMEOUT_TO_RECONNECT`).  
+- **Suporte ao Frontend:** Backend fornece dados completos sobre movimentos, status de turnos e resultados em tempo real.  
 
-- **Requisição de Caminhos Disponíveis**: O frontend pode solicitar ao backend os caminhos que uma peça pode se mover, facilitando a exibição dos movimentos permitidos na interface.
+### **Diferenciais**
 
-- **Movimentação das Peças**: As peças podem ser movidas ao longo do tabuleiro se o movimento for válido; quaisquer efeitos, como captura e promoção para dama, são feitos automaticamente.
-
-- **Gerenciamento de Turnos**: Controla a alternância de turnos entre os jogadores, garantindo que cada jogador realize sua jogada apenas na sua vez.
-
-- **Ranking de Partidas**: Implementa um sistema de classificação dos jogadores com base em suas performances em partidas anteriores, permitindo comparar habilidades e desempenho.
-
-- **Histórico de Partidas**: Os jogadores podem acessar um registro detalhado de todas as suas partidas jogadas anteriormente, incluindo resultados, datas e adversários.
-
-- **Finalização de Partida Automática**: A partida termina automaticamente quando um jogador fica sem peças no tabuleiro.
-
-- **Finalização de Partida por Desistência**: A partida também pode ser finalizada por desistência de um jogador, resultando em sua derrota.
-
-- **Finalização de Partida por Desconexão**: A partida pode ser finalizada se um jogador se desconectar por um período maior que o definido em `TIMEOUT_TO_RECONNECT`, sendo declarado perdedor. Se uma partida permanecer em aberto com jogadores desconectados (pode acontecer quando o backend é desligado abruptamente), o frontend pode chamar o endpoint `match/check-and-finish` para forçar a finalização.
-
+- **Segurança Avançada:** Validação de token antes de conexões WebSocket e autenticação integrada com provedores OAuth2.  
+- **Automação no Jogo:** Gerenciamento de regras, turnos e encerramento de partidas de forma automática.  
+- **Engajamento:** Ranking e histórico detalhado promovem a competição saudável entre jogadores.  
 
 
 #### Regras do Jogo
 
-- **Peças**: Cada jogador inicia com 12 peças distribuídas nas primeiras três linhas do tabuleiro.
+<details>
+  <summary>Clique aqui para ver as regras completas</summary>
 
-- **Movimentação**: As peças comuns se movem uma casa por vez na diagonal, para frente. As damas podem se mover quantas casas desejar ao longo das diagonais.
+  - **Peças**: Cada jogador inicia com 12 peças distribuídas nas primeiras três linhas do tabuleiro.
 
-- **Promoção para Damas**: Quando uma peça comum alcança a extremidade oposta do tabuleiro, ela se torna uma dama. As damas possuem a habilidade de se mover e capturar em qualquer direção ao longo das diagonais.
+  - **Movimentação**: As peças comuns se movem uma casa por vez na diagonal, para frente. As damas podem se mover quantas casas desejar ao longo das diagonais.
 
-- **Captura de Peças**: As peças comuns e damas podem capturar peças adversárias. A captura é realizada quando um movimento salta por cima de uma peça inimiga, removendo-a do tabuleiro.
+  - **Promoção para Damas**: Quando uma peça comum alcança a extremidade oposta do tabuleiro, ela se torna uma dama. As damas possuem a habilidade de se mover e capturar em qualquer direção ao longo das diagonais.
 
-- **Captura para Trás**: Capturas para trás são permitidas para ambas as peças, comuns e damas.
+  - **Captura de Peças**: As peças comuns e damas podem capturar peças adversárias. A captura é realizada quando um movimento salta por cima de uma peça inimiga, removendo-a do tabuleiro.
 
-- **Opcionalidade da Captura**: A captura não é obrigatória; o jogador é livre para executar qualquer movimento disponível, mesmo que não envolva capturas.
+  - **Captura para Trás**: Capturas para trás são permitidas para ambas as peças, comuns e damas.
 
-- **Capturas em Cadeia**: Capturas em cadeia são permitidas, possibilitando que uma única peça capture múltiplas peças adversárias em sequência, incluindo mudanças de direção.
+  - **Opcionalidade da Captura**: A captura não é obrigatória; o jogador é livre para executar qualquer movimento disponível, mesmo que não envolva capturas.
 
-- **Movimentação da Dama Após Captura**: Após realizar uma captura, seja ela normal ou em cadeia, a dama deve se mover para a casa vazia que fica imediatamente após a última peça capturada
+  - **Capturas em Cadeia**: Capturas em cadeia são permitidas, possibilitando que uma única peça capture múltiplas peças adversárias em sequência, incluindo mudanças de direção.
 
-- **Condição de Vitória**: Um jogador vence a partida quando captura todas as peças adversárias ou quando o oponente desiste.
+  - **Movimentação da Dama Após Captura**: Após realizar uma captura, seja ela normal ou em cadeia, a dama deve se mover para a casa vazia que fica imediatamente após a última peça capturada.
+
+  - **Condição de Vitória**: Um jogador vence a partida quando captura todas as peças adversárias ou quando o oponente desiste.
+
+</details>
+
 
 
 
