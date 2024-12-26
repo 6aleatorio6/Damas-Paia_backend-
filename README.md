@@ -49,9 +49,6 @@ Conta com uma cobertura abrangente de testes, incluindo testes **unitários** e 
 
 #### Regras do Jogo
 
-<details>
-  <summary>Clique aqui para ver as regras completas</summary>
-
   - **Peças**: Cada jogador inicia com 12 peças distribuídas nas primeiras três linhas do tabuleiro.
 
   - **Movimentação**: As peças comuns se movem uma casa por vez na diagonal, para frente. As damas podem se mover quantas casas desejar ao longo das diagonais.
@@ -70,7 +67,6 @@ Conta com uma cobertura abrangente de testes, incluindo testes **unitários** e 
 
   - **Condição de Vitória**: Um jogador vence a partida quando captura todas as peças adversárias ou quando o oponente desiste.
 
-</details>
 
 
 
